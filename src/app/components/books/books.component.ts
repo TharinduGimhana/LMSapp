@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import { BooksService } from 'src/app/service/books.service';
 
 @Component({
   selector: 'app-books',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
-  constructor() { }
+  constructor(public books_service: BooksService) { }
 
   ngOnInit(): void {
+    this.resetForm();
+  }
+
+
+  resetForm(form?:NgForm){
+    if(form!=null)
+    form.resetForm();
+    this.books_service.formData ={
+      Id:0,
+      BookCode:'',
+      BookCount:0,
+      BookName:''
+    }
+
+  }
+
+  OnSubmit(form:NgForm){
+    console.log("Clicked")
   }
 
 }
